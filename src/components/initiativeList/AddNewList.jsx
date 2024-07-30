@@ -64,7 +64,6 @@ export default function AddNewList({ addItem, saveData, savedAdventuresList }) {
   });
 
   useEffect(() => {
-    console.log(savedAdventuresList);
     if (savedAdventuresList.length > 0) {
       setValue('savedAdventures', savedAdventuresList);
     }

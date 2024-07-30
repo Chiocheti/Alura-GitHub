@@ -65,7 +65,6 @@ export default function InitiativeList() {
       const adventures = JSON.parse(Cookies.get('adventures'));
       savedAdventuresList.current = JSON.parse(Cookies.get('savedAdventures'));
 
-      console.log(savedAdventuresList.current);
       setValue('adventures', adventures);
     }
 
