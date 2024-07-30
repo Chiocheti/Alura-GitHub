@@ -1,6 +1,4 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import BookmarkIcon from '@mui/icons-material/Bookmark';
-import BookmarkAddIcon from '@mui/icons-material/BookmarkAdd';
 import DeleteIcon from '@mui/icons-material/Delete';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
@@ -12,7 +10,7 @@ import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useFieldArray, useForm } from 'react-hook-form';
 import * as Yup from 'yup';
 
@@ -34,7 +32,7 @@ const listSchema = Yup.object({
   ),
 });
 
-export default function AddNewList({ addItem, saveData, savedAdventuresList }) {
+export default function AddNewList({ addItem }) {
   const {
     formState: { errors },
     watch,
@@ -62,13 +60,6 @@ export default function AddNewList({ addItem, saveData, savedAdventuresList }) {
     control,
     name: 'savedAdventures',
   });
-
-  useEffect(() => {
-    console.log(savedAdventuresList);
-    if (savedAdventuresList.length > 0) {
-      setValue('savedAdventures', savedAdventuresList);
-    }
-  }, [setValue, savedAdventuresList]);
 
   const [save, setSave] = useState(false);
 
@@ -158,21 +149,15 @@ export default function AddNewList({ addItem, saveData, savedAdventuresList }) {
           </Grid>
 
           <Grid item xs={2} sm={1} md={2}>
-            <IconButton onClick={() => saveData(watch('savedAdventures'))}>
-              <SaveIcon color="warning" />
-            </IconButton>
-          </Grid>
-
-          <Grid item xs={2} sm={1} md={2}>
             <Checkbox
               checked={save}
-              icon={<BookmarkIcon color="primary" />}
-              checkedIcon={<BookmarkAddIcon color="info" />}
+              icon={<SaveIcon color="primary" />}
+              checkedIcon={<SaveIcon color="warning" />}
               onClick={handleUpdateSave}
             />
           </Grid>
 
-          <Grid item xs={10} sm={10} md={8}>
+          <Grid item xs={10} sm={11} md={10}>
             <Button text="adicionar" onClick={handleSubmit(pushData)} />
           </Grid>
         </Grid>
