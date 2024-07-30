@@ -12,7 +12,8 @@ import Grid from '@mui/material/Grid';
 import IconButton from '@mui/material/IconButton';
 import InputAdornment from '@mui/material/InputAdornment';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { useState } from 'react';
+import Cookies from 'js-cookie';
+import { useEffect, useRef, useState } from 'react';
 import { useForm, useFieldArray } from 'react-hook-form';
 import * as Yup from 'yup';
 
@@ -56,6 +57,25 @@ export default function InitiativeList() {
   });
 
   const [order, setOrder] = useState(0);
+
+  const savedAdventuresList = useRef([]);
+
+  useEffect(() => {
+    function findData() {
+      const adventures = JSON.parse(Cookies.get('adventures'));
+      savedAdventuresList.current = JSON.parse(Cookies.get('savedAdventures'));
+
+      console.log(savedAdventuresList.current);
+      setValue('adventures', adventures);
+    }
+
+    findData();
+  }, [setValue]);
+
+  function saveData(savedAdventures) {
+    Cookies.set('adventures', JSON.stringify(watch('adventures')));
+    Cookies.set('savedAdventures', JSON.stringify(savedAdventures));
+  }
 
   function addItem(item) {
     prependAdventure(item);
@@ -115,7 +135,7 @@ export default function InitiativeList() {
   return (
     <Box display={useMediaQuery('(min-width:900px)') ? 'flex' : 'block'}>
       <Box width={useMediaQuery('(min-width:900px)') ? '30vw' : null} mx={1}>
-        <AddNewList addItem={addItem} />
+        <AddNewList addItem={addItem} saveData={saveData} savedAdventuresList={savedAdventuresList.current} />
 
         {fieldsAdventures.length > 0 ? (
           <Grid container spacing={1}>
