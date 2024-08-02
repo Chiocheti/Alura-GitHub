@@ -80,5 +80,13 @@ export default function StatusList() {
       value: 'Esmorecido',
       message: <p>Pericias Mentais -5</p>,
     },
+    {
+      value: 'Exausto',
+      message: (
+        <p>
+          Debilitado: Pericias Físicas -5 <br /> Lento: Deslocamento pela metade <br /> Vulnerável: Defesa -2
+        </p>
+      ),
+    },
   ];
 }
