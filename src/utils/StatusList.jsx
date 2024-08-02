@@ -88,5 +88,13 @@ export default function StatusList() {
         </p>
       ),
     },
+    {
+      value: 'Fatigado',
+      message: (
+        <p>
+          Fraco: Pericias Físicas -2 <br /> Vulnerável: Defesa -2
+        </p>
+      ),
+    },
   ];
 }
