@@ -53,6 +53,10 @@ export default function StatusList() {
       ),
     },
     {
+      value: 'Confuso',
+      message: <p>Olhar no livro</p>,
+    },
+    {
       value: 'Debilitado',
       message: <p>Pericias Físicas -5</p>,
     },
